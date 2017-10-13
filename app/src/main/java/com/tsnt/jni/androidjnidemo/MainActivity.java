@@ -11,18 +11,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-    // Example of a call to a native method
-    TextView tv = (TextView) findViewById(R.id.sample_text);
-    tv.setText(stringFromJNI());
+        TextView tv = (TextView) findViewById(R.id.sample_text);
+        TextView tv1 = (TextView) findViewById(R.id.sample_text1);
+
+        tv.setText(getStringFromJNIStatically());
+        tv1.setText(getStringFromJNIDynamically());
     }
 
-    /**
-     * A native method that is implemented by the 'native-lib' native library,
-     * which is packaged with this application.
-     */
-    public native String stringFromJNI();
+    //声明两个本地方法
+    public native String getStringFromJNIStatically();
 
-    // Used to load the 'native-lib' library on application startup.
+    public native String getStringFromJNIDynamically();
+
+    //加载本地库native-lib
     static {
         System.loadLibrary("native-lib");
     }
